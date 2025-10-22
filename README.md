@@ -311,7 +311,7 @@ server {
 }
 ```
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -374,52 +374,6 @@ sudo systemctl status nginx        # Check Nginx status
 curl http://localhost:5000/api/health  # Test app locally
 curl http://server-ip/api/health       # Test via Nginx
 ```
-
-## 📊 Monitoring
-
-### Container Health
-
-```bash
-# Check container health status
-docker inspect --format='{{.State.Health.Status}}' hng13-devops-app
-
-# View health check logs
-docker inspect hng13-devops-app | jq '.[0].State.Health'
-```
-
-### Application Logs
-
-```bash
-# Follow application logs
-docker-compose logs -f web
-
-# View last 100 lines
-docker-compose logs --tail=100 web
-```
-
-### Nginx Logs
-
-```bash
-# Access logs
-sudo tail -f /var/log/nginx/access.log
-
-# Error logs
-sudo tail -f /var/log/nginx/error.log
-```
-
-## 🔒 Security Best Practices
-
-- ✅ Application runs as non-root user in container
-- ✅ SSH key-based authentication (no passwords)
-- ✅ PAT stored securely (not in code)
-- ✅ Minimal Docker image (Python slim)
-- ✅ Health checks for container monitoring
-- ✅ Proper file permissions on SSH keys
-- ✅ Network isolation with Docker networks
-
-## 📝 License
-
-MIT License - feel free to use this project for learning and development.
 
 ## 👤 Author
 
