@@ -1,13 +1,8 @@
 # HNG13 DevOps Stage 1: Automated Deployment Script
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Python](https://img.shields.io/badge/python-3.11-brightgreen.svg)
-![Docker](https://img.shields.io/badge/docker-ready-blue.svg)
-
 A production-grade Bash script that automates the setup, deployment, and configuration of a Dockerized application on a remote Linux server with Nginx reverse proxy.
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Overview](#overview)
 - [Sample Application](#sample-application)
@@ -15,11 +10,8 @@ A production-grade Bash script that automates the setup, deployment, and configu
 - [Prerequisites](#prerequisites)
 - [Quick Start](#quick-start)
 - [Deployment Script Usage](#deployment-script-usage)
-- [Testing Locally](#testing-locally)
-- [Project Structure](#project-structure)
 - [API Endpoints](#api-endpoints)
 - [Configuration](#configuration)
-- [Troubleshooting](#troubleshooting)
 
 ## Overview
 
@@ -55,25 +47,17 @@ The included sample application is a **Flask-based web service** that provides:
 ## ✨ Features
 
 ### Deployment Script (`deploy.sh`)
-- 🔐 Secure authentication with PAT (Personal Access Token)
-- 📦 Automatic Git repository cloning and updates
-- 🐳 Docker and Docker Compose installation
-- 🌐 Nginx reverse proxy configuration
-- ✅ Comprehensive validation and health checks
-- 📝 Detailed logging with timestamps
-- 🔄 Idempotent operations (safe to re-run)
-- 🛡️ Error handling with trap functions
-- 🧹 Optional cleanup mode
+- Secure authentication with PAT (Personal Access Token)
+- Automatic Git repository cloning and updates
+- Docker and Docker Compose installation
+- Nginx reverse proxy configuration
+- Comprehensive validation and health checks
+- Detailed logging with timestamps
+- Idempotent operations (safe to re-run)
+- Error handling with trap functions
+- Optional cleanup mode
 
-### Application Features
-- 🎨 Modern, gradient-based UI
-- 📊 Real-time server statistics
-- 🏥 Health monitoring endpoints
-- 🔍 System information API
-- 📱 Mobile-responsive design
-- 🚀 Production-optimized
-
-## 📦 Prerequisites
+##  Prerequisites
 
 ### Local Development
 - Docker (v20.10+)
@@ -233,23 +217,6 @@ curl http://localhost:5000/api/status
 }
 ```
 
-## 📁 Project Structure
-
-```
-hng13-stage1-devops/
-├── app.py                  # Flask application
-├── requirements.txt        # Python dependencies
-├── Dockerfile             # Docker image definition
-├── docker-compose.yml     # Docker Compose configuration
-├── deploy.sh              # Automated deployment script
-├── .dockerignore          # Docker build exclusions
-├── .gitignore            # Git exclusions
-├── README.md             # This file
-├── TASK.md               # Original task requirements
-└── logs/                 # Deployment logs (created at runtime)
-    └── deploy_YYYYMMDD.log
-```
-
 ## 🔌 API Endpoints
 
 | Endpoint | Method | Description | Response |
@@ -309,70 +276,6 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 }
-```
-
-## Troubleshooting
-
-### Common Issues
-
-**1. Port Already in Use**
-```bash
-# Find and kill process using port 5000
-lsof -ti:5000 | xargs kill -9
-
-# Or use a different port
-docker run -p 8000:5000 hng13-app
-```
-
-**2. Docker Permission Denied**
-```bash
-# Add user to docker group
-sudo usermod -aG docker $USER
-newgrp docker
-```
-
-**3. Container Not Starting**
-```bash
-# Check logs
-docker logs hng13-devops-app
-
-# Check container status
-docker ps -a
-
-# Rebuild without cache
-docker-compose build --no-cache
-```
-
-**4. SSH Connection Issues**
-```bash
-# Test SSH connection
-ssh -i /path/to/key user@server-ip
-
-# Check SSH key permissions
-chmod 600 /path/to/key
-```
-
-**5. Nginx Not Proxying**
-```bash
-# Test Nginx configuration
-sudo nginx -t
-
-# Restart Nginx
-sudo systemctl restart nginx
-
-# Check Nginx logs
-sudo tail -f /var/log/nginx/error.log
-```
-
-### Verify Deployment
-
-```bash
-# On remote server
-docker ps                          # Check running containers
-docker logs hng13-devops-app      # View application logs
-sudo systemctl status nginx        # Check Nginx status
-curl http://localhost:5000/api/health  # Test app locally
-curl http://server-ip/api/health       # Test via Nginx
 ```
 
 ## 👤 Author
